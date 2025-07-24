@@ -29,4 +29,12 @@ return [
         'update' => 'Update User',
         'delete' => 'Delete User',
     ],
+    'notes' => [
+        'group' => 'Notes',
+        'list' => 'Note List',
+        'detail' => 'Note Detail',
+        'create' => 'Create Note',
+        'update' => 'Update Note',
+        'delete' => 'Delete Note',
+    ],
 ];

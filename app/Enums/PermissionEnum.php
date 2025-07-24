@@ -24,4 +24,11 @@ class PermissionEnum
     const PERMISSIONS__CREATE = 'permissions.create';
     const PERMISSIONS__UPDATE = 'permissions.update';
     const PERMISSIONS__DELETE = 'permissions.delete';
+
+    const NOTES = 'notes';
+    const NOTES__LIST = 'notes.list';
+    const NOTES__DETAIL = 'notes.detail';
+    const NOTES__CREATE = 'notes.create';
+    const NOTES__UPDATE = 'notes.update';
+    const NOTES__DELETE = 'notes.delete';
 }

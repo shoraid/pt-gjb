@@ -128,6 +128,44 @@ class PermissionSeeder extends Seeder
                 'name' => __('permission.users.delete'),
                 'display_order' => 5,
             ],
+
+            // Notes
+            [
+                'parent_id' => null,
+                'id' => PermissionEnum::NOTES,
+                'name' => __('permission.notes.group'),
+                'display_order' => 4,
+            ],
+            [
+                'parent_id' => PermissionEnum::NOTES,
+                'id' => PermissionEnum::NOTES__LIST,
+                'name' => __('permission.notes.list'),
+                'display_order' => 1,
+            ],
+            [
+                'parent_id' => PermissionEnum::NOTES,
+                'id' => PermissionEnum::NOTES__DETAIL,
+                'name' => __('permission.notes.detail'),
+                'display_order' => 2,
+            ],
+            [
+                'parent_id' => PermissionEnum::NOTES,
+                'id' => PermissionEnum::NOTES__CREATE,
+                'name' => __('permission.notes.create'),
+                'display_order' => 3,
+            ],
+            [
+                'parent_id' => PermissionEnum::NOTES,
+                'id' => PermissionEnum::NOTES__UPDATE,
+                'name' => __('permission.notes.update'),
+                'display_order' => 4,
+            ],
+            [
+                'parent_id' => PermissionEnum::NOTES,
+                'id' => PermissionEnum::NOTES__DELETE,
+                'name' => __('permission.notes.delete'),
+                'display_order' => 5,
+            ],
         ];
 
         $now = now();

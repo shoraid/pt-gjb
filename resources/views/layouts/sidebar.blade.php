@@ -32,18 +32,20 @@
               @endcan
 
               @can('viewAny', \App\Models\Role::class)
-                <li class="nav-item"> <a href="{{ route('cms.roles.index') }}"
-                    class="nav-link {{ request()->routeIs('cms.roles.*') ? 'active' : '' }}"> <i
-                      class="nav-icon bi bi-person-gear"></i>
+                <li class="nav-item">
+                  <a href="{{ route('cms.roles.index') }}"
+                    class="nav-link {{ request()->routeIs('cms.roles.*') ? 'active' : '' }}">
+                    <i class="nav-icon bi bi-person-gear"></i>
                     <p>{{ __('app.menu.roles') }}</p>
                   </a>
                 </li>
               @endcan
 
               @can('viewAny', \App\Models\Permission::class)
-                <li class="nav-item"> <a href="{{ route('cms.permissions.index') }}"
-                    class="nav-link {{ request()->routeIs('cms.permissions.*') ? 'active' : '' }}"> <i
-                      class="nav-icon bi bi-shield-check"></i>
+                <li class="nav-item">
+                  <a href="{{ route('cms.permissions.index') }}"
+                    class="nav-link {{ request()->routeIs('cms.permissions.*') ? 'active' : '' }}">
+                    <i class="nav-icon bi bi-shield-check"></i>
                     <p>{{ __('app.menu.permissions') }}</p>
                   </a>
                 </li>
@@ -51,11 +53,16 @@
             </ul>
           </li>
         @endif
-        <li class="nav-item">
-          <a href="#" class="nav-link"> <i class="nav-icon bi bi-circle-fill"></i>
-            <p>Level 1</p>
-          </a>
-        </li>
+
+        @can('viewAny', \App\Models\Note::class)
+          <li class="nav-item">
+            <a href="{{ route('cms.notes.index') }}"
+              class="nav-link {{ request()->routeIs('cms.notes.*') ? 'active' : '' }}">
+              <i class="nav-icon bi bi-journal-text"></i>
+              <p>{{ __('app.menu.notes') }}</p>
+            </a>
+          </li>
+        @endcan
       </ul> <!--end::Sidebar Menu-->
     </nav>
   </div> <!--end::Sidebar Wrapper-->

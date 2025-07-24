@@ -6,12 +6,30 @@ return [
         'users' => 'Users',
         'permissions' => 'Permissions',
         'roles' => 'Roles',
+        'notes' => 'Notes',
     ],
 
     'dashboard' => [
         'buttons' => [],
         'titles' => [
             'index' => 'Home',
+        ]
+    ],
+
+    'notes' => [
+        'title' => 'Title',
+        'content' => 'Content',
+        'author' => 'Author',
+        'archived' => 'Archived',
+        'placeholders' => [
+            'title' => 'Enter note title',
+            'content' => 'Write your note here...',
+        ],
+        'titles' => [
+            'index' => 'Notes',
+            'create' => 'Create Note',
+            'edit' => 'Edit Note',
+            'show' => 'Note Details'
         ]
     ],
 

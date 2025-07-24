@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+/**
+ * @property int $id
+ * @property string $public_id
+ * @property string $title
+ * @property string $content
+ * @property int $author_id
+ * @property bool $archived
+ */
+class Note extends Model
+{
+    /** @use HasFactory<\Database\Factories\NoteFactory> */
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'public_id',
+        'title',
+        'content',
+        'author_id',
+        'archived',
+    ];
+}

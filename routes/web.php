@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CMS\DashboardController;
+use App\Http\Controllers\CMS\NoteController;
 use App\Http\Controllers\CMS\UserController;
 use App\Http\Controllers\CMS\PermissionController;
 use App\Http\Controllers\CMS\ProfileController;
@@ -18,6 +19,8 @@ Route::name('cms.')
         Route::resource('permissions', PermissionController::class);
         Route::resource('roles', RoleController::class);
         Route::resource('users', UserController::class);
+
+        Route::resource('notes', NoteController::class);
 
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/profile/edit', 'edit')->name('profile.edit');
