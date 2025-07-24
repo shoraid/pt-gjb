@@ -24,7 +24,8 @@
           <tr>
             <th style="width: 10px">{{ __('app.general.number') }}</th>
             <th>{{ __('app.notes.title') }}</th>
-            <th>{{ __('app.notes.archived') }}</th>
+            <th>{{ __('app.notes.author') }}</th>
+            <th>{{ __('app.notes.user_sharing_label') }}</th>
             <th></th>
           </tr>
         </thead>
@@ -34,7 +35,17 @@
             <tr class="align-middle">
               <td>{{ $loop->iteration + $notes->perPage() * ($notes->currentPage() - 1) }}</td>
               <td>{{ $note->title }}</td>
-              <td>{{ $note->archived ? __('app.general.yes') : __('app.general.no') }}</td>
+              <td>{{ $note->author?->name }}</td>
+              <td>
+                @if ($note->author_id === auth()->id() && $note->users->isNotEmpty())
+                  {{ $note->users->take(3)->pluck('name')->join(', ') }}
+                  @if ($note->users->count() > 3)
+                    +{{ $note->users->count() - 3 }} more
+                  @endif
+                @else
+                  -
+                @endif
+              </td>
               <td style="width: 1%; white-space: nowrap;">
                 <x-buttons.dropdown :label="__('app.buttons.actions')">
                   @can('view', $note)

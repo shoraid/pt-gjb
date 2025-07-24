@@ -32,7 +32,9 @@ class NoteController extends Controller
     {
         Gate::authorize('create', Note::class);
 
-        return view('cms.notes.create');
+        $users = $this->service->getSelectedUserList();
+
+        return view('cms.notes.create', compact('users'));
     }
 
     /**
@@ -67,7 +69,14 @@ class NoteController extends Controller
     {
         Gate::authorize('update', $note);
 
-        return view('cms.notes.edit', compact('note'));
+        $selectedUserIds = $note
+            ->users
+            ->pluck('id')
+            ->toArray();
+
+        $users = $this->service->getSelectedUserList($selectedUserIds);
+
+        return view('cms.notes.edit', compact('note', 'users', 'selectedUserIds'));
     }
 
     /**
@@ -97,6 +106,15 @@ class NoteController extends Controller
         return to_route('cms.notes.index')->with([
             'type' => 'success',
             'message' => __('app.messages.data_deleted')
+        ]);
+    }
+
+    public function getUserList(Request $request)
+    {
+        $users = $this->service->getUserList($request);
+
+        return response()->json([
+            'data' => $users,
         ]);
     }
 }

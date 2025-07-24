@@ -65,7 +65,7 @@ class User extends Authenticatable
     protected function imageUrl(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->image ? "/storage/images/{$this->image}" : "/assets/images/default-user.png",
+            get: fn() => $this->image ? config('app.url') . "/storage/images/{$this->image}" : config('app.url') . "/assets/images/default-user.png",
         );
     }
 

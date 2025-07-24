@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $title
  * @property string $content
  * @property int $author_id
- * @property bool $archived
  */
 class Note extends Model
 {
@@ -24,6 +23,15 @@ class Note extends Model
         'title',
         'content',
         'author_id',
-        'archived',
     ];
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id')->withDefault();
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, NoteShare::class);
+    }
 }

@@ -20,12 +20,13 @@
 
         <x-forms.textarea :label="__('app.notes.content')" name="content" :placeholder="__('app.notes.placeholders.content')" required />
 
-        <x-forms.label :label="__('app.notes.archived')" name="archived" required>
-          <div>
-            <x-forms.radio :label="__('app.general.yes')" name="archived" value="1" inline :checked="old('archived', '1') == '1'" />
-            <x-forms.radio :label="__('app.general.no')" name="archived" value="0" inline :checked="old('is_active') == '0'" />
-          </div>
-        </x-forms.label>
+        <x-forms.select :label="__('app.notes.user_sharing_label')" name="user_ids" multiple>
+          @foreach ($users as $user)
+            <option value="{{ $user->id }}" @selected(in_array($user->id, old('user_ids', [])))>
+              {{ $user->name }}
+            </option>
+          @endforeach
+        </x-forms.select>
 
         <div>
           <button type="submit" class="btn btn-primary me-2">
@@ -40,3 +41,56 @@
     </form>
   </x-ui.app-content>
 @endsection
+
+@push('scripts')
+  <script>
+    $('#user_ids').select2({
+      width: '100%',
+      allowClear: true,
+      placeholder: "{{ __('app.notes.placeholders.users') }}",
+      cache: true,
+      ajax: {
+        url: "{{ route('cms.notes.users') }}",
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+          return {
+            search: params.term || '',
+            page: params.page || 1,
+          };
+        },
+        processResults: function(result) {
+          return {
+            results: result.data.data.map(function(user) {
+              return {
+                id: user.id,
+                text: user.name,
+                avatar: user.image_url
+              };
+            }),
+            pagination: {
+              more: result.data.next_page_url !== null
+            }
+          };
+        },
+      },
+      templateResult: function(user) {
+        if (!user.id) return user.text;
+
+        var $user = $(
+          '<div class="select2-result-user d-flex align-items-center">' +
+          '<img src="' + user.avatar + '" class="rounded-circle me-2" style="width:24px; height:24px;" />' +
+          '<span>' + user.text + '</span>' +
+          '</div>'
+        );
+        return $user;
+      },
+      templateSelection: function(user) {
+        return user.text || user.id;
+      },
+      escapeMarkup: function(markup) {
+        return markup;
+      }
+    });
+  </script>
+@endpush

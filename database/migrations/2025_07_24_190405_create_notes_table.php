@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->integer('author_id')->index();
-            $table->boolean('archived')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

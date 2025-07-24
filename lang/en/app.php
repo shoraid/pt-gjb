@@ -20,10 +20,12 @@ return [
         'title' => 'Title',
         'content' => 'Content',
         'author' => 'Author',
-        'archived' => 'Archived',
+        'user_sharing_label' => 'Share with User',
+        'users' => 'Users',
         'placeholders' => [
             'title' => 'Enter note title',
             'content' => 'Write your note here...',
+            'users' => '-- Choose Users --'
         ],
         'titles' => [
             'index' => 'Notes',

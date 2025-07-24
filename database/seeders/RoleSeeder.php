@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\PermissionEnum;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -33,6 +34,14 @@ class RoleSeeder extends Seeder
             'name' => 'Common User',
             'can_delete' => false,
         ]);
+
+        $notePermissionIds = Permission::query()
+            ->where('parent_id', PermissionEnum::NOTES)
+            ->get(['id'])
+            ->pluck('id')
+            ->toArray();
+
+        $commonUserRole->permissions()->attach($notePermissionIds);
 
         Role::factory(100)->create();
     }

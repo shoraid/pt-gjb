@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\CMS;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class NoteRequest extends FormRequest
 {
@@ -24,7 +26,8 @@ class NoteRequest extends FormRequest
         return [
             'title' => 'required|max:250',
             'content' => 'required',
-            'archived' => 'required|boolean',
+            'user_ids' => 'nullable|array',
+            'user_ids.*' => Rule::exists(User::class, 'id'),
         ];
     }
 
@@ -33,7 +36,8 @@ class NoteRequest extends FormRequest
         return [
             'title' => __('app.notes.title'),
             'content' => __('app.notes.content'),
-            'archived' => __('app.notes.archived'),
+            'user_ids' => __('app.notes.users'),
+            'user_ids.*' => __('app.notes.users'),
         ];
     }
 }

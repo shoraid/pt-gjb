@@ -22,7 +22,6 @@ class NoteFactory extends Factory
             'title' => $this->faker->words(3, true),
             'content' => $this->faker->words(10, true),
             'author_id' => User::factory(),
-            'archived' => $this->faker->boolean(),
         ];
     }
 }

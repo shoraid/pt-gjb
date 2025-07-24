@@ -7,9 +7,12 @@
     </x-slot>
 
     <x-slot name="tools">
-      <a href="{{ route('cms.notes.edit', $note->id) }}" class="btn btn-warning">
-        {{ __('app.buttons.edit') }}
-      </a>
+      @can('update', $note)
+        <a href="{{ route('cms.notes.edit', $note->id) }}" class="btn btn-warning">
+          {{ __('app.buttons.edit') }}
+        </a>
+      @endcan
+
       <a href="{{ route('cms.notes.index') }}" class="btn btn-secondary">
         {{ __('app.buttons.back') }}
       </a>
@@ -19,7 +22,18 @@
 
     <x-details.text :label="__('app.notes.content')" :value="$note->content" />
 
-    <x-details.text :label="__('app.notes.archived')" :value="$note->archived ? __('app.general.yes') : __('app.general.no')" />
+    <div>
+      <div class="text-secondary">{{ __('app.notes.user_sharing_label') }}</div>
+      @if ($note->users->first())
+        @foreach ($note->users as $user)
+          <ul class="m-0">
+            <li>{{ $user->name }}</li>
+          </ul>
+        @endforeach
+      @else
+        -
+      @endif
+    </div>
 
   </x-ui.app-content>
 @endsection

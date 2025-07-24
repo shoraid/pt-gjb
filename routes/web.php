@@ -20,6 +20,7 @@ Route::name('cms.')
         Route::resource('roles', RoleController::class);
         Route::resource('users', UserController::class);
 
+        Route::get('notes/users', [NoteController::class, 'getUserList'])->name('notes.users');
         Route::resource('notes', NoteController::class);
 
         Route::controller(ProfileController::class)->group(function () {

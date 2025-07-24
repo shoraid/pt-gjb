@@ -21,7 +21,15 @@ class NotePolicy
      */
     public function view(User $user, Note $note): bool
     {
-        return $user->hasPermissions(PermissionEnum::NOTES__DETAIL) && $user->id == $note->author_id;
+        if ($user->hasPermissions(PermissionEnum::NOTES__DETAIL) && $user->id == $note->author_id) {
+            return true;
+        }
+
+        if (in_array($user->id, $note->users->pluck('id')->toArray())) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
