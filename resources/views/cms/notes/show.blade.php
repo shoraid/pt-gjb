@@ -22,6 +22,8 @@
 
     <x-details.text :label="__('app.notes.content')" :value="$note->content" />
 
+    <x-details.text :label="__('app.notes.is_public')" :value="$note->is_public ? __('app.general.yes') : __('app.general.no')" />
+
     <div>
       <div class="text-secondary">{{ __('app.notes.user_sharing_label') }}</div>
       @if ($note->users->first())

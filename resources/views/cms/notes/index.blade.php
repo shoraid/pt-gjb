@@ -18,13 +18,14 @@
       <x-ui.alert :type="session('type')" :message="session('message')" />
     @endsession
 
-    <div class="table-responsive">
+    <div class="table-responsive" style="min-height: 15rem;">
       <table class="table table-hover">
         <thead>
           <tr>
             <th style="width: 10px">{{ __('app.general.number') }}</th>
             <th>{{ __('app.notes.title') }}</th>
             <th>{{ __('app.notes.author') }}</th>
+            <th>{{ __('app.notes.is_public') }}</th>
             <th>{{ __('app.notes.user_sharing_label') }}</th>
             <th></th>
           </tr>
@@ -36,8 +37,9 @@
               <td>{{ $loop->iteration + $notes->perPage() * ($notes->currentPage() - 1) }}</td>
               <td>{{ $note->title }}</td>
               <td>{{ $note->author?->name }}</td>
+              <td>{{ $note->is_public ? __('app.general.yes') : __('app.general.no') }}</td>
               <td>
-                @if ($note->author_id === auth()->id() && $note->users->isNotEmpty())
+                @if ($note->users->isNotEmpty())
                   {{ $note->users->take(3)->pluck('name')->join(', ') }}
                   @if ($note->users->count() > 3)
                     +{{ $note->users->count() - 3 }} more
@@ -48,6 +50,15 @@
               </td>
               <td style="width: 1%; white-space: nowrap;">
                 <x-buttons.dropdown :label="__('app.buttons.actions')">
+                  @if ($note->is_public)
+                    @can('view', $note)
+                      <button type="button" onclick="copyPublicUrl('{{ route('public.notes.show', $note->public_id) }}')"
+                        class="dropdown-item">
+                        {{ __('app.buttons.copy_public_url') }}
+                      </button>
+                    @endcan
+                  @endif
+
                   @can('view', $note)
                     <x-buttons.dropdown-item :label="__('app.buttons.detail')" :url="route('cms.notes.show', $note->id)" />
                   @endcan
@@ -79,3 +90,13 @@
     </div>
   </x-ui.app-content>
 @endsection
+
+@push('scripts')
+  <script>
+    function copyPublicUrl(url) {
+      navigator.clipboard.writeText(url)
+        .then(() => alert('Public URL copied: ' + url))
+        .catch(err => console.error('Failed to copy: ', err));
+    }
+  </script>
+@endpush

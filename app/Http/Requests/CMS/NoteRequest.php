@@ -26,6 +26,7 @@ class NoteRequest extends FormRequest
         return [
             'title' => 'required|max:250',
             'content' => 'required',
+            'is_public' => 'required|boolean',
             'user_ids' => 'nullable|array',
             'user_ids.*' => Rule::exists(User::class, 'id'),
         ];
@@ -36,6 +37,7 @@ class NoteRequest extends FormRequest
         return [
             'title' => __('app.notes.title'),
             'content' => __('app.notes.content'),
+            'is_public' => __('app.notes.is_public'),
             'user_ids' => __('app.notes.users'),
             'user_ids.*' => __('app.notes.users'),
         ];

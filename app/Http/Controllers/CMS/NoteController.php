@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\CMS;
 
+use App\Enums\PermissionEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CMS\NoteRequest;
 use App\Models\Note;
@@ -111,6 +112,8 @@ class NoteController extends Controller
 
     public function getUserList(Request $request)
     {
+        Gate::allowIf($request->user()->hasPermissions(PermissionEnum::NOTES__CREATE, PermissionEnum::NOTES__UPDATE));
+
         $users = $this->service->getUserList($request);
 
         return response()->json([

@@ -22,6 +22,7 @@ return [
         'author' => 'Author',
         'user_sharing_label' => 'Share with User',
         'users' => 'Users',
+        'is_public' => 'Public Access',
         'placeholders' => [
             'title' => 'Enter note title',
             'content' => 'Write your note here...',
@@ -118,6 +119,7 @@ return [
         'detail' => 'Detail',
         'edit' => 'Edit',
         'submit' => 'Submit',
+        'copy_public_url' => 'Copy Public URL',
     ],
 
     'general' => [

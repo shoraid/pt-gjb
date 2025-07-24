@@ -55,6 +55,7 @@ class NoteService
                 'title' => $data['title'],
                 'content' => $data['content'],
                 'author_id' => $userId,
+                'is_public' => isset($data['is_public']) && $data['is_public'] == '1'  ? true : false,
             ]);
 
             $note->users()->attach($data['user_ids'] ?? []);
@@ -71,6 +72,7 @@ class NoteService
             $note->update([
                 'title' => $data['title'],
                 'content' => $data['content'],
+                'is_public' => isset($data['is_public']) && $data['is_public'] == '1'  ? true : false,
             ]);
 
             $note->users()->sync($data['user_ids'] ?? []);

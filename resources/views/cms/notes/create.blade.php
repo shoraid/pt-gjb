@@ -20,6 +20,13 @@
 
         <x-forms.textarea :label="__('app.notes.content')" name="content" :placeholder="__('app.notes.placeholders.content')" required />
 
+        <x-forms.label :label="__('app.notes.is_public')" name="is_public" required>
+          <div>
+            <x-forms.radio :label="__('app.general.yes')" name="is_public" value="1" inline :checked="old('is_public') == '1'" />
+            <x-forms.radio :label="__('app.general.no')" name="is_public" value="0" inline :checked="old('is_public', '0') == '0'" />
+          </div>
+        </x-forms.label>
+
         <x-forms.select :label="__('app.notes.user_sharing_label')" name="user_ids" multiple>
           @foreach ($users as $user)
             <option value="{{ $user->id }}" @selected(in_array($user->id, old('user_ids', [])))>
