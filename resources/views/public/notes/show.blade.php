@@ -12,7 +12,7 @@
       </div>
 
       <div>
-        {{ $note->content }}
+        {!! $note->content !!}
       </div>
     </div>
   </x-layouts.public.content>

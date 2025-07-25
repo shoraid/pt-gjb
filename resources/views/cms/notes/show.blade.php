@@ -20,8 +20,6 @@
 
     <x-details.text :label="__('app.notes.title')" :value="$note->title" />
 
-    <x-details.text :label="__('app.notes.content')" :value="$note->content" />
-
     <x-details.text :label="__('app.notes.total_comments')" :value="$note->total_comments" />
 
     <x-details.text :label="__('app.notes.is_public')" :value="$note->is_public ? __('app.general.yes') : __('app.general.no')" />
@@ -40,7 +38,20 @@
     </div>
 
     <x-slot name="additional">
-      <div class="d-flex justify-content-center">
+      <div>
+        <div class="fs-4 mb-3">
+          {{ __('app.notes.content') }}
+        </div>
+        <div class="card mb-4 py-3">
+          <div class="card-body">
+            <div class="d-flex flex-column gap-4">
+              <x-details.rich-text value="{!! $note->content !!}" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center" style="min-height: 30rem;">
         <div class="w-100" style="max-width: 60rem;">
           <div class="card mb-4 py-3">
             <div class="card-body">

@@ -18,7 +18,7 @@
       <x-ui.alert :type="session('type')" :message="session('message')" />
     @endsession
 
-    <div class="table-responsive" style="min-height: 15rem;">
+    <div class="table-responsive" style="min-height: 20rem;">
       <table class="table table-hover">
         <thead>
           <tr>

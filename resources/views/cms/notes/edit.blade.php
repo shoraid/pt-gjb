@@ -19,7 +19,8 @@
       <div class="d-flex flex-column gap-4">
         <x-forms.input :label="__('app.notes.title')" name="title" :value="$note->title" :placeholder="__('app.notes.placeholders.title')" required />
 
-        <x-forms.textarea :label="__('app.notes.content')" name="content" :value="$note->content" :placeholder="__('app.notes.placeholders.content')" required />
+        <x-forms.rich-text-editor :label="__('app.notes.content')" name="content" value="{!! $note->content !!}" :placeholder="__('app.notes.placeholders.content')"
+          required />
 
         <x-forms.label :label="__('app.notes.is_public')" name="is_public" required>
           <div>
@@ -102,4 +103,12 @@
       }
     });
   </script>
+@endpush
+
+@push('styles')
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+@endpush
+
+@push('scripts')
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 @endpush
