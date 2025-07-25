@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->boolean('can_delete')->default(true);
-            $table->integer('created_by_id')->index()->nullable();
+            $table->foreignId('created_by_id')->nullable()->constrained('users');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('created_by_id');
         });
     }
 

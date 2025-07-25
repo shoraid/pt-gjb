@@ -168,7 +168,7 @@ class PermissionSeeder extends Seeder
             ],
         ];
 
-        $now = now();
+        $now = now()->subDay();
         $permissions = collect($permissions)
             ->map(function ($permission, int $i) use ($now) {
                 $permission['created_at'] = $now->copy()->addHours($i);

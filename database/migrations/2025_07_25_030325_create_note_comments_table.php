@@ -13,14 +13,19 @@ return new class extends Migration
     {
         Schema::create('note_comments', function (Blueprint $table) {
             $table->id();
-            $table->uuid('public_id')->index();
-            $table->integer('note_id')->index();
-            $table->integer('user_id')->index();
-            $table->integer('parent_id')->nullable()->index();
+            $table->uuid('public_id');
+            $table->foreignId('note_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('parent_id')->nullable()->constrained('note_comments');
             $table->text('content');
             $table->integer('total_children')->default(0);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('public_id');
+            $table->index('note_id');
+            $table->index('user_id');
+            $table->index('parent_id');
         });
     }
 

@@ -48,6 +48,7 @@ class Comments extends Component
     public function render()
     {
         $comments = $this->note->comments()
+            ->with(['user:id,name'])
             ->whereNull('parent_id')
             ->latest()
             ->paginate(10);

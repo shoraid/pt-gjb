@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('role_has_permission', function (Blueprint $table) {
-            $table->integer('role_id')->index();
-            $table->string('permission_id')->index();
+            $table->integer('role_id')->constrained();
+            $table->string('permission_id')->constrained();
+
+            $table->index('role_id');
+            $table->index('permission_id');
         });
     }
 

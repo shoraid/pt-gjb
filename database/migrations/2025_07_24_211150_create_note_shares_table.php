@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('note_shares', function (Blueprint $table) {
-            $table->integer('note_id')->index();
-            $table->integer('user_id')->index();
+            $table->foreignId('note_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+
+            $table->index('note_id');
+            $table->index('user_id');
         });
     }
 

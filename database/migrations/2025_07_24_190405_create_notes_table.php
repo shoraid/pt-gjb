@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->uuid('public_id')->index();
+            $table->uuid('public_id');
             $table->string('title');
             $table->text('content');
-            $table->integer('author_id')->index();
+            $table->foreignId('author_id')->constrained('users');
             $table->boolean('is_public')->default(false);
             $table->integer('total_comments')->default(0);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('public_id');
+            $table->index('author_id');
         });
     }
 

@@ -19,10 +19,12 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->string('password');
             $table->string('image')->nullable();
-            $table->integer('created_by_id')->nullable();
+            $table->foreignId('created_by_id')->nullable()->constrained('users');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('created_by_id');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
