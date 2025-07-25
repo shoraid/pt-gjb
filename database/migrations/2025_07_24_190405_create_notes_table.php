@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('content');
             $table->integer('author_id')->index();
             $table->boolean('is_public')->default(false);
+            $table->integer('total_comments')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Note;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -30,11 +31,15 @@ class Comments extends Component
         $this->authorize('view', $this->note);
         $this->validate();
 
-        $this->note->comments()->create([
-            'public_id' => Str::uuid7(),
-            'user_id' => Auth::id(),
-            'content' => $this->content,
-        ]);
+        DB::transaction(function () {
+            $this->note->comments()->create([
+                'public_id' => Str::uuid7(),
+                'user_id' => Auth::id(),
+                'content' => $this->content,
+            ]);
+
+            $this->note->increment('total_comments');
+        });
 
         $this->reset('content');
         $this->resetPage(); // return to page 1

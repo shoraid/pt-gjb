@@ -10,9 +10,9 @@
   <div class="d-flex gap-2">
     <button class="btn btn-link btn-sm ps-0" wire:click="$toggle('showReply')">Reply</button>
 
-    @if ($this->children->count())
-      <button class="btn btn-link btn-sm ps-0"wire:click="$toggle('showChildren')">
-        {{ $showChildren ? 'Hide Replies' : 'Show Replies' }} ({{ $this->children->count() }})
+    @if ($comment->total_children)
+      <button class="btn btn-link btn-sm ps-0" wire:click="$toggle('showChildren')">
+        {{ $showChildren ? 'Hide Replies' : 'Show Replies' }} ({{ $comment->total_children }})
       </button>
     @endif
   </div>

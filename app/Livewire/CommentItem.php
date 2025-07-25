@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\NoteComment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Illuminate\Support\Str;
 
@@ -30,21 +31,22 @@ class CommentItem extends Component
 
         $this->validate();
 
-        $this->comment->note->comments()->create([
-            'public_id' => Str::uuid7(),
-            'user_id' => Auth::id(),
-            'parent_id' => $this->comment->id,
-            'content' => $this->replyContent,
-        ]);
+        DB::transaction(function () {
+            $this->comment->note->comments()->create([
+                'public_id' => Str::uuid7(),
+                'user_id' => Auth::id(),
+                'parent_id' => $this->comment->id,
+                'content' => $this->replyContent,
+            ]);
+
+            $this->comment->note->increment('total_comments');
+
+            $this->comment->increment('total_children');
+        });
 
         $this->reset('replyContent');
         $this->showReply = false;
         $this->comment->unsetRelation('children'); // force reload
-    }
-
-    public function delete()
-    {
-        $this->comment->delete();
     }
 
     public function getChildrenProperty()

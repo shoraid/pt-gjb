@@ -25,6 +25,7 @@
             <th style="width: 10px">{{ __('app.general.number') }}</th>
             <th>{{ __('app.notes.title') }}</th>
             <th>{{ __('app.notes.author') }}</th>
+            <th>{{ __('app.notes.total_comments') }}</th>
             <th>{{ __('app.notes.is_public') }}</th>
             <th>{{ __('app.notes.user_sharing_label') }}</th>
             <th></th>
@@ -37,6 +38,7 @@
               <td>{{ $loop->iteration + $notes->perPage() * ($notes->currentPage() - 1) }}</td>
               <td>{{ $note->title }}</td>
               <td>{{ $note->author?->name }}</td>
+              <td>{{ $note->total_comments }}</td>
               <td>{{ $note->is_public ? __('app.general.yes') : __('app.general.no') }}</td>
               <td>
                 @if ($note->users->isNotEmpty())

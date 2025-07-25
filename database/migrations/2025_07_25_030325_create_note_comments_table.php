@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('user_id')->index();
             $table->integer('parent_id')->nullable()->index();
             $table->text('content');
+            $table->integer('total_children')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

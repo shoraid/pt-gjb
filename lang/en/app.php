@@ -23,6 +23,7 @@ return [
         'user_sharing_label' => 'Share with User',
         'users' => 'Users',
         'is_public' => 'Public Access',
+        'total_comments' => 'Total Comments',
         'placeholders' => [
             'title' => 'Enter note title',
             'content' => 'Write your note here...',

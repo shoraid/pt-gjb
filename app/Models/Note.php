@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $content
  * @property int $author_id
  * @property bool $is_public
+ * @property int $total_comments
  */
 class Note extends Model
 {
@@ -25,6 +26,7 @@ class Note extends Model
         'content',
         'author_id',
         'is_public',
+        'total_comments',
     ];
 
     public function author()
