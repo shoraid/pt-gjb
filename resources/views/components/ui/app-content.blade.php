@@ -21,6 +21,10 @@
           </div>
         </div>
       </div>
+
+      @isset($additional)
+        {{ $additional }}
+      @endisset
     </div>
   </div>
 </main>

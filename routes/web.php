@@ -22,6 +22,7 @@ Route::name('cms.')
         Route::resource('users', UserController::class);
 
         Route::get('notes/users', [NoteController::class, 'getUserList'])->name('notes.users');
+        Route::resource('notes/comments', NoteController::class);
         Route::resource('notes', NoteController::class);
 
         Route::controller(ProfileController::class)->group(function () {

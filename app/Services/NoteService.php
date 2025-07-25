@@ -37,6 +37,7 @@ class NoteService
             ->when($search, function (Builder $q) use ($search) {
                 $q->where('name', 'ILIKE', "%{$search}%");
             })
+            ->where('id', '!=', $request->user()->id)
             ->paginate(columns: ['id', 'name', 'image']);
     }
 

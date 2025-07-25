@@ -37,5 +37,18 @@
       @endif
     </div>
 
+    <x-slot name="additional">
+      <div class="d-flex justify-content-center">
+        <div class="w-100" style="max-width: 60rem;">
+          <div class="card mb-4 py-3">
+            <div class="card-body">
+              <div class="d-flex flex-column gap-4">
+                <livewire:comments :note="$note" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </x-slot>
   </x-ui.app-content>
 @endsection

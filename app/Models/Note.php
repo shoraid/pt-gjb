@@ -36,4 +36,9 @@ class Note extends Model
     {
         return $this->belongsToMany(User::class, NoteShare::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(NoteComment::class);
+    }
 }
